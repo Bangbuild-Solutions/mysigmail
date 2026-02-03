@@ -31,6 +31,7 @@ let s3Client: S3Client
 try {
   s3Client = new S3Client({
     region: import.meta.env.VITE_AWS_S3_REGION,
+    endpoint: import.meta.env.VITE_AWS_S3_ENDPOINT,
     credentials: {
       accessKeyId: import.meta.env.VITE_AWS_S3_ID,
       secretAccessKey: import.meta.env.VITE_AWS_S3_KEY,
