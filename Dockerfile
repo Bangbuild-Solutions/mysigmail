@@ -18,11 +18,15 @@ RUN bun run build
 # Production stage
 FROM nginx:alpine
 
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
+
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built application from builder stage
 WORKDIR /usr/share/nginx/html/
+RUN rm -rf ./*
 COPY --from=builder /app/dist .
 
 EXPOSE 80
