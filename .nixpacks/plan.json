@@ -1,0 +1,16 @@
+{
+  "phases": {
+    "setup": {
+      "nixPkgs": ["nodejs_22", "bun"]
+    },
+    "install": {
+      "cmds": ["bun i --no-save"]
+    },
+    "build": {
+      "cmds": ["bun run build"]
+    }
+  },
+  "start": {
+    "cmd": "npx serve@latest dist -s -l 80"
+  }
+}

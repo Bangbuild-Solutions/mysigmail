@@ -12,6 +12,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "start": "npx serve@latest dist -s -l 80",
     "lint": "vue-tsc --noEmit && eslint .",
     "lint:fix": "eslint . --fix",
     "release": "bumpp -c 'build: release v' -t",
