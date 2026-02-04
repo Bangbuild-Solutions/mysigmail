@@ -18,6 +18,9 @@ RUN bun run build
 # Production stage
 FROM nginx:alpine
 
+# Cache bust argument - change this value to force rebuild
+ARG CACHEBUST=2
+
 # Remove ALL default nginx configs
 RUN rm -rf /etc/nginx/conf.d/*
 
