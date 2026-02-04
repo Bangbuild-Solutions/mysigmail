@@ -19,24 +19,23 @@ RUN bun run build
 FROM nginx:alpine
 
 # Cache bust argument - change this value to force rebuild
-ARG CACHEBUST=2
+ARG CACHEBUST=4
 
-# Remove ALL default nginx configs
-RUN rm -rf /etc/nginx/conf.d/*
+# Replace the MAIN nginx.conf with our custom one
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy custom nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Verify the config was copied (for debugging)
-RUN cat /etc/nginx/conf.d/default.conf
+# Verify the config
+RUN echo "=== NGINX CONFIG ===" && cat /etc/nginx/nginx.conf
 
 # Copy built application from builder stage
 WORKDIR /usr/share/nginx/html/
 RUN rm -rf ./*
 COPY --from=builder /app/dist .
 
-# List files to verify (for debugging)
-RUN ls -la /usr/share/nginx/html/
+# List files and test nginx config
+RUN ls -la /usr/share/nginx/html/ && \
+    echo "=== TESTING NGINX CONFIG ===" && \
+    nginx -t
 
 EXPOSE 80
 
