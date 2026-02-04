@@ -19,7 +19,7 @@ RUN bun run build
 FROM nginx:alpine
 
 # Cache bust argument - change this value to force rebuild
-ARG CACHEBUST=13
+ARG CACHEBUST=14
 
 # Replace the MAIN nginx.conf with our custom one
 COPY nginx.conf /etc/nginx/nginx.conf
